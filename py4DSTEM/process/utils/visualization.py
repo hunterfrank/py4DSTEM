@@ -36,7 +36,7 @@ def plot_bragg_disks(peaks, datacube, Rx, Ry, image=None, scale=200, power=0.25,
     gridsize = int(np.ceil(np.sqrt(len(Rx) + 1)))
     fig, ax = plt.subplots(int(np.ceil((len(Rx) + 1) / gridsize)), gridsize, figsize=(12, 12))
 
-    ax[0, 0].matshow(image if image is not None else np.zeros((datacube.R_Nx, datacube.R_Ny)))
+    ax[0, 0].matshow(image if image is not None else np.zeros((datacube.R_Nx, datacube.R_Ny)),cmap='gray')
 
     colors = cycler('color', ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728',
                     '#9467bd', '#8c564b', '#e377c2', '#7f7f7f',
@@ -48,7 +48,7 @@ def plot_bragg_disks(peaks, datacube, Rx, Ry, image=None, scale=200, power=0.25,
         c = clr["color"]
         ax[0, 0].scatter(Ry[i], Rx[i], color=c)
 
-        ax.ravel()[i + 1].matshow(np.maximum(_(datacube.data[Rx[i], Ry[i]]),0) ** power)
+        ax.ravel()[i + 1].matshow(np.maximum(_(datacube.data[Rx[i], Ry[i]]),0) ** power,cmap='gray')
 
         if scale == 0:
             ax.ravel()[i + 1].scatter(peaks[i].data['qy'], peaks[i].data['qx'], color=c)
